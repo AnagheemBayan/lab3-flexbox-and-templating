@@ -1,0 +1,43 @@
+#photo-template {
+    display: none;
+  }
+  
+  
+  
+  div img{
+    width: 325px;
+    height: 200px;
+
+    
+  }
+  select{
+    padding: 10px 20px;
+    font-size: 60%;
+    background-color: #f0d4ed;
+    color: #77757c;
+    border-style: none;
+    border-radius: 15px;
+  
+  }
+  #Page1{
+    padding: 9px 16px;
+    background-color:  #f0d4ed;
+    border-style: none;
+    color: #000000;
+    border-radius: 15px;
+    margin: 20px;
+    margin-left: 142px;
+    margin-bottom: 4px;
+    
+
+  }
+  #Page2{
+    padding: 10px 16px;
+    background-color:  #f0d4ed;
+    border-style: none;
+    color: #000000;
+    border-radius: 15px;
+  }
+  
+  
+  
