@@ -1,11 +1,13 @@
 div{
     /* float: left; */
-    border: 1px solid black;
-    margin: 20px 0;
+  
+    border: 19px solid black;
+    margin: 67px 0;
     width: 350px;
     text-align: center;
     height: 375px;
-    background-color: rgba(112, 95, 95, 0.425);
+    background-color: #dccfcf;
+    border-radius: 15px;
    
   }
   main{
@@ -14,7 +16,7 @@ div{
     margin-right: auto;
     position: relative;
     /* border: 5px solid #000000; */
-    background-color: rgb(116, 78, 78);
+    background-color: rgb(218, 203, 203);
     
     
   }
@@ -27,7 +29,7 @@ div{
   }
   header{
     color: #000000;
-    background-color: #555454;
+    background-color: #c29f9f;
     width: 100%;
     margin-bottom: 20px;
     text-align: center;
@@ -44,7 +46,7 @@ div{
     align-items: center;
     display: flex;
     justify-content: center;
-    background-color: #555454;
+    background-color: #c29f9f;
     color: rgb(0, 0, 0);
   }
   

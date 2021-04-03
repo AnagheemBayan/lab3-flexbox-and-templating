@@ -1,22 +1,21 @@
 'use strict';
-let keywords = [];
-let infoArray = [];
-let allPictures = [];
-let page =1;
+let  searchArr = [];
+let  infoArray= [];
+let picArr= [];
 
-function Images(item) {
-    this.image_url = item.image_url;
-    this.title = item.title;
-    this.description = item.description;
-    this.keyword = item.keyword;
-    this.horns = item.horns;
-    keywords.push(this.keyword);
-    allPictures.push(this);
+function ImgConstructor(element) {
+    this.image_url = element.image_url;
+    this.title = element.title;
+    this.description =element.description;
+    this.keyword = element.keyword;
+    this.horns = element.horns;
+    searchArr.push(this.keyword);
+    picArr.push(this);
 
 };
+// ////////////////// to show the data as it's from html file and the tags that are used 
 
-Images.prototype.renderIt = function () {
-    
+ImgConstructor.prototype.renderIt = function () {
 
     let template = $('#mustache-template').html();
     let html = Mustache.render(template, this);
@@ -24,6 +23,7 @@ Images.prototype.renderIt = function () {
     return html;
 };
 
+// ///////////////////////////// to get the data and store it in empty array
 function getData(array) {
 
    
@@ -34,10 +34,11 @@ function getData(array) {
     }
 
 }
+// ///////////////////////////// used to copy the html parents and children 
 
 function selected() {
 
-    $('select').append('<option value="all" id="option">filter by keywords</option>');
+    $('select').append('<option value="all" id="option"> Search by keywords</option>');
 
     for (let i = 0; i < infoArray.length; i++) {
 
@@ -56,7 +57,9 @@ function selected() {
 
 }
 
-function forSorting1(arr) {
+// //////////////////////////////////// to sort the data based on title or horns 
+
+function Sorting1(arr) {
     arr.sort((a, b) => {
         if (a.title.toUpperCase() < b.title.toUpperCase()) {
             return -1;
@@ -67,7 +70,7 @@ function forSorting1(arr) {
     })
     return arr;
 };
-function forSorting2(arr) {
+function Sorting2(arr) {
     arr.sort((a, b) => {
         if (a.horns < b.horns) {
             return -1;
@@ -81,7 +84,7 @@ function forSorting2(arr) {
 
 
 
-Images.readJson1 = () => {
+ImgConstructor.readJson1 = () => {
     const ajaxSettings = {
         method: 'get',
         dataType: 'json'
@@ -89,19 +92,19 @@ Images.readJson1 = () => {
 
     $.ajax('data/page-1.json', ajaxSettings).then((data) => {
 
-            forSorting1(data);
+        Sorting1(data);
 
-        data.forEach((item) => {
-            let horn = new Images(item);
+        data.forEach((element) => {
+            let horn = new ImgConstructor (element);
             $('#allItems').append(horn.renderIt());
         });
-        getData(keywords);
+        getData(searchArr);
         selected();
     });
 
 };
 
-Images.readJson2 = () => {
+ImgConstructor.readJson2 = () => {
     const ajaxSettings = {
         method: 'get',
         dataType: 'json'
@@ -109,173 +112,34 @@ Images.readJson2 = () => {
 
     $.ajax('data/page-2.json', ajaxSettings).then((data) => {
 
-        forSorting1(data);
+        Sorting1(data);
 
-        data.forEach((item) => {
-            let horn = new Images(item);
+        data.forEach((element) => {
+            let horn = new ImgConstructor(element);
             $('#allItems').append(horn.renderIt());
         });
-        getData(keywords);
+        getData(searchArr);
         selected();
     });
 
 };
 
+///////////
 
-$(() => Images.readJson1());
+$(() => ImgConstructor.readJson1());
 
 function page1() {
     $('.all').remove();
-    keywords = [];
+     searchArr = [];
     infoArray = [];
     $('option').remove();
-    Images.readJson1();
-
-    page =1;
+    ImgConstructor.readJson1();
 }
 
 function page2() {
     $('.all').remove();
-    keywords = [];
+      searchArr= [];
     infoArray = [];
     $('option').remove();
-   Images.readJson2();
-
-    page =2;
-
-}
-
-
-
-
-function sort1(){
-    let currentSort =document.getElementById("select").value;
-
-    if(page == 1){
-        $('.all').remove();
-        keywords = [];
-        infoArray = [];
-        $('option').remove();
-        
-        const ajaxSettings = {
-            method: 'get',
-            dataType: 'json'
-        };
-    
-        $.ajax('data/page-1.json', ajaxSettings).then((data) => {
-    
-                forSorting1(data);
-    
-            data.forEach((item) => {
-                let horn = new Images(item);
-                $('#allItems').append(horn.renderIt());
-            });
-            getData(keywords);
-            selected();
-
-            document.getElementById("select").value = currentSort;
-            $('div').css({ 'display': 'none' });
-            $('.' + currentSort).css({ 'display': 'inline-block' })
-        });
-    
-    }
-
-    if(page == 2){
-        $('.all').remove();
-        keywords = [];
-        infoArray = [];
-        $('option').remove();
-        
-        const ajaxSettings = {
-            method: 'get',
-            dataType: 'json'
-        };
-    
-        $.ajax('data/page-2.json', ajaxSettings).then((data) => {
-    
-                forSorting1(data);
-    
-            data.forEach((item) => {
-                let horn = new Images(item);
-                $('#allItems').append(horn.renderIt());
-            });
-            getData(keywords);
-            selected();
-
-            document.getElementById("select").value = currentSort;
-            $('div').css({ 'display': 'none' });
-            $('.' + currentSort).css({ 'display': 'inline-block' })
-        });
-    
-    } 
-}
-
-
-function sort2(){
-    let currentSort =document.getElementById("select").value;
-
-    if(page == 1){
-        $('.all').remove();
-        keywords = [];
-        infoArray = [];
-        $('option').remove();
-        
-        const ajaxSettings = {
-            method: 'get',
-            dataType: 'json'
-        };
-    
-        $.ajax('data/page-1.json', ajaxSettings).then((data) => {
-    
-                forSorting2(data);
-    
-            data.forEach((item) => {
-                    let horn = new Images(item);
-                    $('#allItems').append(horn.renderIt());
-        
-            });
-            getData(keywords);
-            selected();
-
-            document.getElementById("select").value = currentSort;
-            $('div').css({ 'display': 'none' });
-            $('.' + currentSort).css({ 'display': 'inline-block' })
-        });
-
-    }
-
-    if(page == 2){
-        $('.all').remove();
-        keywords = [];
-        infoArray = [];
-        $('option').remove();
-        
-
-
-
-        const ajaxSettings = {
-            method: 'get',
-            dataType: 'json'
-        };
-    
-        $.ajax('data/page-2.json', ajaxSettings).then((data) => {
-    
-                forSorting2(data);
-    
-            data.forEach((item) => {
-                let horn = new ImagesS(item);
-                $('#allItems').append(horn.renderIt());
-            });
-            getData(keywords);
-            selected();
-
-            document.getElementById("select").value = currentSort;
-            $('div').css({ 'display': 'none' });
-            $('.' + currentSort).css({ 'display': 'inline-block' })
-        });
-    } 
-
-
-    
-
+    ImgConstructor.readJson2();
 }

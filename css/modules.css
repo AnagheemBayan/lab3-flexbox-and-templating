@@ -17,6 +17,9 @@
     color: #77757c;
     border-style: none;
     border-radius: 15px;
+    position: absolute;
+    left: 550px;
+    top: 150px
   
   }
   #Page1{
@@ -26,8 +29,12 @@
     color: #000000;
     border-radius: 15px;
     margin: 20px;
-    margin-left: 142px;
-    margin-bottom: 4px;
+    /* margin-left: 142px;
+    margin-bottom: 4px; */
+    margin: -3px;
+    position: absolute;
+    left: 328px;
+    
     
 
   }
@@ -37,6 +44,10 @@
     border-style: none;
     color: #000000;
     border-radius: 15px;
+    margin-left: 550px;
+    margin-top: 0px;
+    margin-bottom: 10px
+  
   }
   
   
